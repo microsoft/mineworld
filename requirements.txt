@@ -1,0 +1,15 @@
+torch==2.6.0
+torchvision==0.21.0
+omegaconf==2.3.0
+transformers==4.48.1
+opencv-python==4.11.0.86
+attrs==25.3.0
+diffusers==0.32.2
+gradio==5.24.0
+einops==0.8.1
+diffusers==0.32.2
+scipy==1.15.2
+torch-fidelity==0.3.0
+gym3==0.3.3
+gym==0.26.2
+scikit-learn==1.6.1
