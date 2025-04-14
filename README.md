@@ -28,7 +28,7 @@ We recommend using high-end GPU for inference. We have done all testing and deve
 
 
 ## 🎈 Checkpoints
-Download pre-trained models [here](https://huggingface.co/mineworld). Each checkpoint has a corresponding config file with the same name in the `configs` folder in this repository. All models share the same vae checkpoint and config. The data structure is as follows:
+Download pre-trained models [here](https://huggingface.co/microsoft/mineworld). Each checkpoint has a corresponding config file with the same name in the `configs` folder in this repository. All models share the same vae checkpoint and config. The data structure is as follows:
 ```
 └── checkpoints
     ├── 300M_16f.ckpt
