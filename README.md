@@ -11,7 +11,7 @@ https://github.com/user-attachments/assets/2f5b4740-badd-453c-970d-061abd367f82
 ## 🔧 Setup
 1. Clone this repository and navigate to MineWorld folder:
 ```bash
-git clone https://github.com/mineworld
+git clone https://github.com/microsoft/mineworld
 cd mineworld
 ```
 2. We provide an `requirements.txt` file for setting up a pip environment.
