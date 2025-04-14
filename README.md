@@ -11,7 +11,7 @@ https://github.com/user-attachments/assets/2f5b4740-badd-453c-970d-061abd367f82
 ## 🔧 Setup
 1. Clone this repository and navigate to MineWorld folder:
 ```bash
-git clone https://github.com/mineworld
+git clone https://github.com/microsoft/mineworld.git
 cd mineworld
 ```
 2. We provide an `requirements.txt` file for setting up a pip environment.
@@ -67,7 +67,7 @@ The game progresses when pressing the "Run" button, displaying the last `8` fram
 
 Explanations to the buttons in the web demo are as follows:
 ```
-Start frame: select a frame in scene.mp4 with its id
+Start frame: select a frame in scene.mp4 with its frame index
 Jump to start frame: use the selected frame as the initial state
 Camera `X` and `Y`: control the camera movements between `-90` and `90` degrees
 Other action buttons: same as the actions in Minecraft 
@@ -80,14 +80,14 @@ To run inference locally, use the following command:
 
 ```bash
 python inference.py \
-        --data_root /path/to/validation/dataset \
-        --model_ckpt path/to/ckpt \
-        --config path/to/config \
+        --data_root "/path/to/validation/dataset" \
+        --model_ckpt "path/to/ckpt" \
+        --config "path/to/config" \
         --demo_num 1 \
         --frames 15 \
         --accelerate-algo 'naive' \
         --top_p 0.8 \
-        --output_dir path/to/output
+        --output_dir "path/to/output"
 ```
 
 Check `scripts/inference_16f_models.sh` for examples. To switch between naive autoregressive decoding and diagonal decoding, change the command `--accelerate-algo` to `naive` and `image_diagd` correspondingly. 
