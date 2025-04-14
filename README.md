@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/2f5b4740-badd-453c-970d-061abd367f82
 git clone https://github.com/mineworld
 cd mineworld
 ```
-2. We provide an `requirements.txt` file for setting up a pip environment.
+2. We provide a `requirements.txt` file for setting up a pip environment.
 ```bash
 # 1. Prepare conda environment
 conda create -n mineworld python=3.10
