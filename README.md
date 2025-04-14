@@ -5,6 +5,9 @@
 [![arXiv](https://img.shields.io/badge/arXiv-Paper-red?logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2412.13061) &ensp; [![Project](https://img.shields.io/badge/Project-Page-blue?logo=homepage&logoColor=white)](https://aka.ms/mineworld) &ensp; [![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow)](https://huggingface.co/microsoft/mineworld)
 </div>
 
+https://github.com/user-attachments/assets/2f5b4740-badd-453c-970d-061abd367f82
+
+
 ## 🔧 Setup
 1. Clone this repository and navigate to MineWorld folder:
 ```bash
