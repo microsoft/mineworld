@@ -1,12 +1,20 @@
 <div align="center">
 
-# MineWorld <br> <sub>A Real-time interactive world model on Minecraft</sub>
+# MineWorld <br> <sub>A Real-time Interactive World Model on Minecraft</sub>
 
 [![arXiv](https://img.shields.io/badge/arXiv-Paper-red?logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2504.08388) &ensp; [![Project](https://img.shields.io/badge/Project-Page-blue?logo=homepage&logoColor=white)](https://aka.ms/mineworld) &ensp; [![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow)](https://huggingface.co/microsoft/mineworld)
 </div>
 
+We introduce MineWorld, an interactive world model on Minecraft that brings several key advancements over existing approaches: 
+* 🕹️ **High generation quality**. Built on a visual-action autoregressive Transformer, MineWorld generates coherent, high-fidelity frames conditioned on both visuals and actions. 
+* 🕹️ **Strong controllability**. We propose benchmarks for the action-following capacity, where MineWorld shows precise and consistent behavior. 
+* 🕹️ **Fast inference speed**. With Diagonal Decoding, MineWorld achieves a generation rate of 4 to 7 frames per second, enabling real-time interaction in open-ended game environments. 
+
 https://github.com/user-attachments/assets/2f5b4740-badd-453c-970d-061abd367f82
 
+## 🔥 News
+* April, 2025: 🚀 [MineWorld](https://github.com/microsoft/mineworld) was released!
+* March, 2025: 🚀 The paper of [Diagonal Decoding](https://arxiv.org/pdf/2503.14070) was released!
 
 ## 🔧 Setup
 1. Clone this repository and navigate to MineWorld folder:
