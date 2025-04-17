@@ -3,17 +3,20 @@
 import numpy as np
 import torch as th
 import cv2
-import pdb
 from gym3.types import DictType
 from gym import spaces
 from tqdm import tqdm
-
-from lib.action_mapping import CameraHierarchicalMapping, IDMActionMapping
+import os 
+from argparse import ArgumentParser
+import pickle
+import cv2
+import json
+from lib.action_mapping import IDMActionMapping
 from lib.actions import ActionTransformer
 from lib.policy import InverseActionPolicy
 from lib.torch_util import default_device_type, set_default_torch_device
 
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import precision_score, recall_score, f1_score
 # Hardcoded settings
 AGENT_RESOLUTION = (128, 128)
 safe_globals = {"array": np.array}
@@ -109,13 +112,7 @@ class IDMAgent:
 # As such, while it is close and seems to function well,
 # its performance might be bit off from what is reported
 # in the paper.
-import os 
-from argparse import ArgumentParser
-import pickle
-import cv2
-import numpy as np
-import json
-import torch as th
+
 ENV_KWARGS = dict(
     fov_range=[70, 70],
     frameskip=1,
@@ -232,15 +229,6 @@ def json_action_to_env_action(json_action):
 
     return env_action, is_null_action
 
-def load_action_jsonl_old(path_action):
-    action_list = []
-    with open(path_action, 'r') as f:
-        for line in f:
-            line = eval(line.strip(), {"__builtins__": None}, safe_globals)
-            line['camera'] = np.array(line['camera'])
-            # act_dict = vis_act_tok.tokenize_actions(action_dict=line)
-            action_list.append(act_dict)  
-    return action_list
 
 def load_action_jsonl(json_path):
     with open(json_path) as json_file:
@@ -278,6 +266,7 @@ def evaluate_IDM_quality(model, weights,jsonl_folder, video_folder, infer_demo_n
     eval_num = min(500,len(video_files)) 
     video_files = video_files[:eval_num]
     dataset_labels = {}
+    camera_loss_list = []
     for video_file in tqdm(video_files):
         json_file = os.path.join(jsonl_folder,os.path.basename(video_file).replace(".mp4",".jsonl"))
         # old implementation
@@ -293,12 +282,14 @@ def evaluate_IDM_quality(model, weights,jsonl_folder, video_folder, infer_demo_n
             dataset_labels[key]["pred_labels"].append(subtasks_labels[key]["pred_labels"])# array 
             dataset_labels[key]["rec_labels"].append(subtasks_labels[key]["rec_labels"]) # array 
             dataset_labels[key]["class_num"] = subtasks_labels[key]["class_num"]
-    
+        camera_loss_list.append(camera_loss(predicted_actions,recorded_actions)["camera_bin_loss"])
+        
     dataset_results ={}
     for key in dataset_labels:
         pred_labels = np.stack(dataset_labels[key]["pred_labels"]).flatten() # [num_videos , num_frames] -> [video_num x frame_num]
         rec_labels = np.stack(dataset_labels[key]["rec_labels"]).flatten()   # [num_videos , num_frames] -> [video_num x frame_num]
         dataset_results[key]=classification_metric(pred_labels, rec_labels, dataset_labels[key]["class_num"])
+    
     # import pdb;pdb.set_trace()
     metric_mean_on_task = {}
     metrics = ['precision_micro', 'recall_micro', 'f1_micro', 'precision_macro', 'recall_macro', 'f1_macro']
@@ -308,6 +299,7 @@ def evaluate_IDM_quality(model, weights,jsonl_folder, video_folder, infer_demo_n
             continue
         metric_mean_on_task[key] = np.mean([dataset_results[task][key] for task in tasks])
     dataset_results["metric_mean_on_task"] = metric_mean_on_task
+    dataset_results["metric_mean_on_task"]["camera_loss"] = np.mean(camera_loss_list)
     ## change all keys into str
     dataset_results = {str(k): v for k, v in dataset_results.items()}
         
@@ -433,7 +425,7 @@ def idm_prediction(agent, video_path,json_path, infer_demo_num, n_frames):
         predicted_actions[key] = np.array(predicted_actions[key]).reshape(-1)
     return predicted_actions,recorded_actions
 
-def camera_loss():
+def camera_loss(predicted_actions,recorded_actions):
     from lib.actions import CameraQuantizer
     cam_quantizer = CameraQuantizer(
     camera_binsize=2,
@@ -441,7 +433,7 @@ def camera_loss():
     mu=10,
     quantization_scheme="mu_law")
     # import pdb;pdb.set_trace()
-    cam_pred_token=cam_quantizer.discretize(predicted_actions['camera'])
+    cam_pred_token=cam_quantizer.discretize(predicted_actions['camera'].reshape(-1))
     cam_gt_token  =cam_quantizer.discretize(np.array(recorded_actions['camera']))
     camera_bin_loss = np.abs(cam_pred_token-cam_gt_token).mean()
     return {
