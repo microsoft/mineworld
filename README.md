@@ -13,6 +13,7 @@ We introduce MineWorld, an interactive world model on Minecraft that brings seve
 https://github.com/user-attachments/assets/2f5b4740-badd-453c-970d-061abd367f82
 
 ## 🔥 News
+* May, 2025: The model checkpoints in the [Huggingface repo](https://huggingface.co/microsoft/mineworld) have been temporally taken down per request from the Minecraft team due to IP issues.
 * April, 2025: 🚀 [MineWorld](https://github.com/microsoft/mineworld) was released!
 * March, 2025: 🚀 The paper of [Diagonal Decoding](https://arxiv.org/pdf/2503.14070) was released!
 
