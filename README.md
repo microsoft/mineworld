@@ -153,7 +153,7 @@ Some of the limitations of this model to be aware of include:
 ```bibtex
 @article{guo2025mineworld,
   title={MineWorld: a Real-Time and Open-Source Interactive World Model on Minecraft}, 
-  author={Guo, Junliang and Ye, Yang and He, Tianyu and Wu, Haoyu and Jiang, Yushu and Pearce, Tim and Bian, Jiang}
+  author={Guo, Junliang and Ye, Yang and He, Tianyu and Wu, Haoyu and Jiang, Yushu and Pearce, Tim and Bian, Jiang},
   year={2025},
   journal={arXiv preprint arXiv:2504.08388},
 }
