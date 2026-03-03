@@ -5,7 +5,7 @@ transformers==4.48.1
 opencv-python==4.11.0.86
 attrs==25.3.0
 diffusers==0.32.2
-gradio==5.24.0
+gradio==6.7.0
 einops==0.8.1
 diffusers==0.32.2
 scipy==1.15.2
